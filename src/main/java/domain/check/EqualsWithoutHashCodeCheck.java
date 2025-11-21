@@ -1,4 +1,9 @@
 package domain.check;
 
-public class EqualsWithoutHashCodeCheck {
+import domain.asm.ClassInfo;
+
+public class EqualsWithoutHashCodeCheck implements  CheckRule {
+    public CheckResult check(ClassInfo classInfo) {
+        return null;
+    }
 }
