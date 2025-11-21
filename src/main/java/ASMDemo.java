@@ -8,6 +8,7 @@ public class ASMDemo {
         ClassReader cr = new ClassReader("java.lang.String");
 
         ClassVisitor cv = new ClassVisitor(Opcodes.ASM9) {
+
             @Override
             public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
                 System.out.println("方法: " + name + "   描述符: " + desc);

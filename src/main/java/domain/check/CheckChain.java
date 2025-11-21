@@ -1,7 +1,5 @@
 package domain.check;
 
-import com.sun.tools.javac.comp.Check;
-
 import java.util.ArrayList;
 import java.util.List;
 
