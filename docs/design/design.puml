@@ -112,7 +112,7 @@ package domain {
 
     +class CheckChain {
         - checks: List<CheckRule>
-        + addCheck(check: Check): void
+        + addCheck(check: CheckRule): void
         + executeChecks(): List<CheckResult>
     }
     CheckChain -->"*" CheckRule
