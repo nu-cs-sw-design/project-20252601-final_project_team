@@ -1,9 +1,13 @@
 package domain.api_request;
 
-public class LLMFeedback {
-    private String url;
+public class LLMFeedback extends ExternalAPIRequest {
 
     public LLMFeedback(String url) {
-        this.url = url;
+        super(url);
+    }
+
+    @Override
+    public String getResponse() {
+        return "LLM feedback response";
     }
 }

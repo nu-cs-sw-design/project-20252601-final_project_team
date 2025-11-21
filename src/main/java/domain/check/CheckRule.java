@@ -1,7 +1,8 @@
-package domain.check;
+package domain;
 
 import domain.asm.ClassInfo;
+import domain.check.CheckResult;
 
 public interface CheckRule {
-    public CheckResult check(ClassInfo classInfo);
+    CheckResult check(ClassInfo classInfo);
 }

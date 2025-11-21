@@ -1,13 +1,15 @@
 package domain.api_request;
 
+import domain.HttpsRequest;
+
 public abstract class ExternalAPIRequest {
-    private String url;
+
+    protected HttpsRequest httpsRequest = new HttpsRequest();
+    protected String url;
 
     public ExternalAPIRequest(String url) {
         this.url = url;
     }
 
-    public String getReponse(){
-        return null;
-    }
+    public abstract String getResponse();
 }
