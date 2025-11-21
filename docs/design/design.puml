@@ -1,2 +1,149 @@
 @startuml
+package datasource {
+    +class ReportFileGenerator {
+        - filePath: String
+        + generateFile(): void
+    }
+}
+package domain {
+    +class MethodInfo {
+        + name: String
+        + description: String
+        + parameters: List<String>
+        + returnType: String
+        + access: int
+        + isConstructor: boolean
+        + complexity: int
+    }
+
+    +class FieldInfo {
+        + name: String
+        + description: String
+        + access: int
+        + used: boolean
+    }
+
+    +class ClassInfo {
+        + name: String
+        + methods: List<MethodInfo>
+        + fields: List<FieldInfo>
+        +dependencies: List<String>
+        +hasPublicConstructor: boolean
+        +hasEquals: boolean
+        +hasHashCode: boolean
+    }
+    ClassInfo -->"*" MethodInfo
+    ClassInfo -->"*" FieldInfo
+
+    +class ProjectInfo {
+        + classes: List<ClassInfo>
+        + structure: TreeNode<String>
+    }
+    ProjectInfo -->"*" ClassInfo
+
+    +class ASMUtil {
+        - path: String
+        - loadClass(byteCode: byte[]): ClassInfo
+        + loadProject(): ProjectInfo
+    }
+    ASMUtil --> ProjectInfo
+    ASMUtil ..> ClassInfo
+
+    +class HttpsRequest {
+        + post(url:String, requestBody: RequestBody): ResponseEntity
+        + get(url:String): ResponseEntity
+    }
+
+    +abstract class ExternalAPIRequest {
+        - httpsRequest: HttpsRequest
+        - url: String
+        + getResponse(): String
+    }
+    ExternalAPIRequest --> HttpsRequest
+
+    +class ProjectAnalyzer {
+        - checkChain: CheckChain
+        - asmUtil: ASMUtil
+        - api: ExternalAPIRequest
+        - builder: ReportBuilder
+        - path: String
+        + analyze(path: String): String
+    }
+    ProjectAnalyzer --> ASMUtil
+    ProjectAnalyzer --> ExternalAPIRequest
+
+    +class CheckResult {
+        + checkName: String
+        + className: String
+        + result: boolean
+        + message: String
+    }
+
+    +interface CheckRule {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    CheckRule ..> CheckResult
+    CheckRule ..> ClassInfo
+
+    +class NameConventionsCheck {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    NameConventionsCheck ..|> CheckRule
+
+    +class EqualsWithoutHashCodeCheck {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    EqualsWithoutHashCodeCheck ..|> CheckRule
+
+    +class PublicConstructorCheck {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    PublicConstructorCheck ..|> CheckRule
+
+    +class CycleDependenciesCheck {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    CycleDependenciesCheck ..|> CheckRule
+
+    +class PoorCohesionCheck {
+        + check(classInfo: ClassInfo): CheckResult
+    }
+    PoorCohesionCheck ..|> CheckRule
+
+    +class CheckChain {
+        - checks: List<CheckRule>
+        + addCheck(check: Check): void
+        + executeChecks(): List<CheckResult>
+    }
+    CheckChain -->"*" CheckRule
+    CheckChain ..> CheckResult
+    ProjectAnalyzer --> CheckChain
+
+    +class LLMFeedback {
+        - url: String
+    }
+    LLMFeedback --|> ExternalAPIRequest
+
+    +class ReportBuilder {
+        - results: List<CheckResult>
+        - fileGenerator: ReportFileGenerator
+        - save(): void
+        + addResult(result: CheckResult): void
+        + build(saveFile: boolean): String
+
+    }
+    ProjectAnalyzer --> ReportBuilder
+    ReportBuilder --> ReportFileGenerator
+    ReportBuilder -->"*" CheckResult
+
+}
+
+package presentation {
+    +class Main {
+        - analyzer: ProjectAnalyzer
+        - projectPath: String
+        + {static} main(args: String[]):void
+    }
+    Main --> ProjectAnalyzer
+}
 @enduml
