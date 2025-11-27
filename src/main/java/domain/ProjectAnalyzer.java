@@ -8,6 +8,7 @@ import domain.check.CheckResult;
 import domain.check.EqualsWithoutHashCodeCheck;
 import domain.check.PublicConstructorCheck;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ProjectAnalyzer {
@@ -19,7 +20,11 @@ public class ProjectAnalyzer {
 
     public ProjectAnalyzer(String path, ExternalAPIRequest api) {
         this.path = path;
-        this.asmUtil = new ASMUtil(path);
+        try {
+            this.asmUtil = new ASMUtil(path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.api = api;
         this.checkChain = new CheckChain();
         this.builder = new ReportBuilder("report.txt");

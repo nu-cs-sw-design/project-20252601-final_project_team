@@ -1,10 +1,8 @@
 package domain.check;
 
-import domain.CheckRule;
 import domain.asm.ClassInfo;
 
 public class EqualsWithoutHashCodeCheck implements CheckRule {
-
     @Override
     public CheckResult check(ClassInfo classInfo) {
         boolean pass = !(classInfo.hasEquals && !classInfo.hasHashCode);

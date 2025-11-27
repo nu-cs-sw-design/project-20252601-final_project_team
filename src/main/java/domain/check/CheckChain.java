@@ -1,6 +1,5 @@
 package domain.check;
 
-import domain.CheckRule;
 import domain.asm.ClassInfo;
 import domain.asm.ProjectInfo;
 
@@ -8,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckChain {
-    private List<CheckRule> checks = new ArrayList<>();
-    private ProjectInfo projectInfo;
+    private final List<CheckRule> checks = new ArrayList<>();
 
     public void addCheck(CheckRule check) {
         checks.add(check);

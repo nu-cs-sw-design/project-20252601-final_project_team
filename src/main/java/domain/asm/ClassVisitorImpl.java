@@ -10,9 +10,10 @@ public class ClassVisitorImpl extends ClassVisitor {
     public List<MethodInfo> methods;
     public List<FieldInfo> fields;
 
-    public ClassVisitorImpl(List<MethodInfo> methods) {
+    public ClassVisitorImpl() {
         super(Opcodes.ASM9);
-        this.methods = methods;
+        this.methods = new ArrayList<>();
+        this.fields = new ArrayList<>();
     }
 
     @Override
@@ -46,8 +47,12 @@ public class ClassVisitorImpl extends ClassVisitor {
     @Override
     public FieldVisitor visitField(int access, String name, String descriptor,
                                    String signature, Object value) {
+        /*
+         * TODO: The field used should be adapted according to the situation
+         */
         FieldInfo fieldInfo = new FieldInfo(name, descriptor, access, false);
         fields.add(fieldInfo);
+        System.out.println(fieldInfo);
         return super.visitField(access, name, descriptor, signature, value);
     }
 }

@@ -5,6 +5,9 @@ import org.objectweb.asm.ClassReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*
+ * TODO: Change the input of ASMUtil from string to byte[]
+ */
 public class ASMUtil {
     private String path;
     private final ClassReader cr;
@@ -12,9 +15,8 @@ public class ASMUtil {
 
     public ASMUtil(String path) throws IOException {
         cr = new ClassReader(path);
-        cv = new ClassVisitorImpl(new ArrayList<>());
+        cv = new ClassVisitorImpl();
         cr.accept(cv, 0);
-        System.out.println(cv.methods);
     }
     public ClassInfo loadClass(byte[] bytecode) {
         ClassInfo classInfo = new ClassInfo();
@@ -24,13 +26,16 @@ public class ASMUtil {
         return null;
     }
 
+    /*
+     * TODO: Load many classes at once
+     */
     public ProjectInfo loadProject() {
         return null;
     }
 
     public static void main(String[] args) {
         try {
-            ASMUtil asmUtil = new ASMUtil("java.lang.String");
+            ASMUtil asmUtil = new ASMUtil("domain.asm.ASMUtil");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

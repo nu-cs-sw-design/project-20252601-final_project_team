@@ -1,4 +1,4 @@
-package domain;
+package domain.check;
 
 import domain.asm.ClassInfo;
 import domain.check.CheckResult;

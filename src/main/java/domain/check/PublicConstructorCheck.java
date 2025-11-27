@@ -1,6 +1,5 @@
 package domain.check;
 
-import domain.CheckRule;
 import domain.asm.ClassInfo;
 
 public class PublicConstructorCheck implements CheckRule {

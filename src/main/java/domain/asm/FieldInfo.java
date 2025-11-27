@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class FieldInfo {
     public String name;
-    public String description;
+    public String type;
     public int access;
     public boolean used;
 }
