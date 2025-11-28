@@ -1,6 +1,5 @@
 package domain.check;
 
-import domain.CheckRule;
 import domain.asm.ClassInfo;
 import domain.asm.FieldInfo;
 import domain.asm.MethodInfo;
@@ -21,14 +20,14 @@ public class NameConventionCheck implements CheckRule {
         for (MethodInfo m : classInfo.methods) {
             if (!checkMethodName(m.name)) {
                 pass = false;
-                sb.append("Method '" + m.name + "' must be camelCase. ");
+                sb.append("Method '").append(m.name).append("' must be camelCase. ");
             }
         }
 
         for (FieldInfo f : classInfo.fields) {
             if (!checkFieldName(f.name, f.access)) {
                 pass = false;
-                sb.append("Field '" + f.name + "' must be camelCase or ALL_CAPS for constants. ");
+                sb.append("Field '").append(f.name).append("' must be camelCase or ALL_CAPS for constants. ");
             }
         }
 

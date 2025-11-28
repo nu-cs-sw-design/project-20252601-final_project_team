@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProjectAnalyzer {
-    private CheckChain checkChain;
-    private ASMUtil asmUtil;
+    private final CheckChain checkChain;
+    private final ASMUtil asmUtil;
     private ExternalAPIRequest api;
     private ReportBuilder builder;
     private String path;
