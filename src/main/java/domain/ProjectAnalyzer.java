@@ -1,6 +1,5 @@
 package domain;
 
-import domain.api_request.ExternalAPIRequest;
 import domain.asm.ASMUtil;
 import domain.asm.ProjectInfo;
 import domain.check.CheckChain;
@@ -14,18 +13,16 @@ import java.util.List;
 public class ProjectAnalyzer {
     private final CheckChain checkChain;
     private final ASMUtil asmUtil;
-    private ExternalAPIRequest api;
     private ReportBuilder builder;
     private String path;
 
-    public ProjectAnalyzer(String path, ExternalAPIRequest api) {
+    public ProjectAnalyzer(String path) {
         this.path = path;
         try {
             this.asmUtil = new ASMUtil(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.api = api;
         this.checkChain = new CheckChain();
         this.builder = new ReportBuilder("report.txt");
 
