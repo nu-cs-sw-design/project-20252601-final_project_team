@@ -21,12 +21,12 @@ public class ProjectAnalyzer {
         this.checkChain = new CheckChain();
         this.builder = new ReportBuilder("report.txt");
 
-        // add checks
         checkChain.addClassCheck(new EqualsWithoutHashCodeClassCheck());
         checkChain.addClassCheck(new PublicConstructorClassCheck());
         checkChain.addClassCheck(new NameConventionClassCheck());
         checkChain.addClassCheck(new PoorCohesionClassCheck());
         checkChain.addProjectCheck(new CycleDependenciesCheck());
+        checkChain.addProjectCheck(new GptFeedBack());
     }
 
     public String analyze() {

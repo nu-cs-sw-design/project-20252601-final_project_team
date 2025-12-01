@@ -1,19 +1,22 @@
-package domain.api_request;
+package domain.check;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 import config.Config;
+import domain.asm.ProjectInfo;
+import domain.check.CheckResult;
+import domain.check.ProjectCheckRUle;
 
-public class GptFeedBack {
+public class GptFeedBack implements ProjectCheckRUle {
     private final OpenAIClient client;
 
     public GptFeedBack() {
         client = OpenAIOkHttpClient.builder().apiKey(Config.API_KEY).build();
     }
 
-    public String getFeedback(String content) {
+    private String getFeedback(String content) {
         ResponseCreateParams params = ResponseCreateParams.builder()
                 .input(content)
                 .model("gpt-5-nano")
@@ -22,5 +25,16 @@ public class GptFeedBack {
         StringBuilder sb = new StringBuilder();
         response.output().forEach(item -> item.message().ifPresent(msg -> msg.content().forEach(c -> c.outputText().ifPresent(textObj -> sb.append(textObj.text())))));
         return sb.toString();
+    }
+
+    @Override
+    public CheckResult check(ProjectInfo projectInfo) {
+        CheckResult result = new CheckResult();
+        result.checkName = "LLM FeedBack";
+        String content = "Follow is my project information. Can you give me some advice?";
+        content += projectInfo.classes.toString();
+        result.message = getFeedback(content);
+        result.result = result.message.equals("");
+        return result;
     }
 }
