@@ -46,7 +46,6 @@ public class ClassVisitorImpl extends ClassVisitor {
          */
         FieldInfo fieldInfo = new FieldInfo(name, descriptor, access, false);
         fields.add(fieldInfo);
-        System.out.println(fieldInfo);
         return super.visitField(access, name, descriptor, signature, value);
     }
 }

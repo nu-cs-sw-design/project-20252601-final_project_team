@@ -18,7 +18,6 @@ public class GptFeedBack {
                 .input(content)
                 .model("gpt-5-nano")
                 .build();
-
         Response response = client.responses().create(params);
         StringBuilder sb = new StringBuilder();
         response.output().forEach(item -> item.message().ifPresent(msg -> msg.content().forEach(c -> c.outputText().ifPresent(textObj -> sb.append(textObj.text())))));

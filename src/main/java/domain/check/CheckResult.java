@@ -13,9 +13,9 @@ public class CheckResult {
 
     public String toString() {
         return (this.checkName == null ? "" : "checkName: " + this.checkName) +
-                (this.className == null ? "" : "className: " + this.className) +
-                "result" + this.result +
-                "message" + this.message;
+                (this.className == null ? "" : "   className: " + this.className) +
+                "   result: " + this.result +
+                "   message: " + this.message;
     }
 
 }
