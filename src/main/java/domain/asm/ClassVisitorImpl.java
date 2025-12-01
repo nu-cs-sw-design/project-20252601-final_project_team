@@ -29,7 +29,6 @@ public class ClassVisitorImpl extends ClassVisitor {
         /*
         * TODO: set complexity
          */
-        int complexity = 0;
 
         MethodInfo methodInfo = new MethodInfo(
                 name,
@@ -37,8 +36,7 @@ public class ClassVisitorImpl extends ClassVisitor {
                 params,
                 returnType,
                 access,
-                isConstructor,
-                complexity
+                isConstructor
         );
         methods.add(methodInfo);
         return super.visitMethod(access, name, descriptor, signature, exceptions);

@@ -14,5 +14,4 @@ public class MethodInfo {
     public String returnType;
     public int access;
     public boolean isConstructor;
-    public int complexity;
 }
