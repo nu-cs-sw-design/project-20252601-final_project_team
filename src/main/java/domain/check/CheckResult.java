@@ -11,11 +11,14 @@ public class CheckResult {
     public boolean result;
     public String message;
 
+    @Override
     public String toString() {
-        return (this.checkName == null ? "" : "checkName: " + this.checkName) +
-                (this.className == null ? "" : "   className: " + this.className) +
-                "   result: " + this.result +
-                "   message: " + this.message;
+        return "----------------------------------------\n" +
+                "Check:      " + checkName + "\n" +
+                "Class:      " + className + "\n" +
+                "Result:     " + (result ? "PASS" : "FAIL") + "\n" +
+                "Message:    " + message + "\n" +
+                "----------------------------------------";
     }
 
 }
