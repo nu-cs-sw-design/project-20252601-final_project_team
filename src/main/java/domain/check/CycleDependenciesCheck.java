@@ -19,25 +19,27 @@ public class CycleDependenciesCheck implements ProjectCheckRUle {
         Deque<String> stack = new ArrayDeque<>();
         Set<String> stackSet = new HashSet<>();
         Set<List<String>> allCycles = new HashSet<>();
-        CheckResult result = new CheckResult();
-        result.checkName = "Cycle Dependencies Check";
+        String checkName;
+        String message;
+        boolean result;
+        checkName = "Cycle Dependencies Check";
         for (String cls : dependencyGraph.keySet()) {
             dfs(cls, visited, stack, stackSet, allCycles);
         }
 
         if (allCycles.isEmpty()) {
-            result.message = "There is no cycle dependencies";
-            result.result = true;
+            message = "There is no cycle dependencies";
+            result = true;
         } else {
             StringBuilder res = new StringBuilder();
             res.append("Number of cycle dependencies: ").append(allCycles.size());
             for (List<String> cycle : allCycles) {
                 res.append(cycle);
             }
-            result.message = res.toString();
-            result.result = false;
+            message = res.toString();
+            result = false;
         }
-        return result;
+        return new CheckResult(checkName, null, result, message);
     }
 
     private void dfs(String cls, Set<String> visited, Deque<String> stack, Set<String> stackSet, Set<List<String>> allCycles) {

@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CheckResult {
-    public String checkName;
-    public String className;
-    public boolean result;
-    public String message;
+    private String checkName;
+    private String className;
+    private boolean result;
+    private String message;
 
     @Override
     public String toString() {
