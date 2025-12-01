@@ -26,10 +26,6 @@ public class ClassVisitorImpl extends ClassVisitor {
         }
         String returnType = methodType.getReturnType().getClassName();
         boolean isConstructor = "<init>".equals(name);
-        /*
-        * TODO: set complexity
-         */
-
         MethodInfo methodInfo = new MethodInfo(
                 name,
                 descriptor,

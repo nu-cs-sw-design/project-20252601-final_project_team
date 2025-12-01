@@ -255,3 +255,5 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 /.idea/
+
+src/main/java/config/Config.java
