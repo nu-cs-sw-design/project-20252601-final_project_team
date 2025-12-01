@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportBuilder {
-    private List<CheckResult> results = new ArrayList<>();
-    private ReportFileGenerator fileGenerator;
+    private final List<CheckResult> results = new ArrayList<>();
+    private final ReportFileGenerator fileGenerator;
 
     public ReportBuilder(String filePath) {
         this.fileGenerator = new ReportFileGenerator(filePath);
@@ -22,9 +22,7 @@ public class ReportBuilder {
         StringBuilder sb = new StringBuilder();
 
         for (CheckResult r : results) {
-            sb.append(r.checkName).append(": ")
-                    .append(r.className).append(" -> ")
-                    .append(r.message).append("\n");
+            sb.append(r.toString()).append(System.lineSeparator());
         }
 
         if (saveFile) fileGenerator.generateFile(sb.toString());

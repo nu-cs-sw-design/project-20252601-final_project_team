@@ -7,18 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckChain {
-    private final List<CheckRule> checks = new ArrayList<>();
+    private final List<ClassCheckRule> classChecks = new ArrayList<>();
 
-    public void addCheck(CheckRule check) {
-        checks.add(check);
+    private final List<ProjectCheckRUle> projectChecks  = new ArrayList<>();
+
+    public void addClassCheck(ClassCheckRule check) {
+        classChecks.add(check);
+    }
+
+    public void addProjectCheck(ProjectCheckRUle check) {
+        projectChecks.add(check);
     }
 
     public List<CheckResult> executeChecks(ProjectInfo pi) {
         List<CheckResult> results = new ArrayList<>();
         for (ClassInfo cls : pi.classes) {
-            for (CheckRule r : checks) {
+            for (ClassCheckRule r : classChecks) {
                 results.add(r.check(cls));
             }
+        }
+        for(ProjectCheckRUle r : projectChecks) {
+            results.add(r.check(pi));
         }
         return results;
     }
