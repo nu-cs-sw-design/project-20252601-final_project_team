@@ -1,0 +1,157 @@
+@startuml
+
+package config {
+    class Config {
+        + PROJECT_PATH : String
+        + FILE_GENERATION_PATH : String
+        + API_KEY : String
+    }
+}
+
+package datasource {
+    class ReportFileGenerator {
+        - filePath : String
+        + ReportFileGenerator(filePath:String)
+        + generateFile(content:String) : void
+    }
+}
+
+package "domain.asm" {
+
+    class ASMUtil {
+        - root : Path
+        + ASMUtil(projectRootPath:String)
+        + loadClass(bytecode:byte[]) : ClassInfo
+        + loadProject() : ProjectInfo
+    }
+
+    class ClassVisitorImpl {
+        + methods : List<MethodInfo>
+        + fields : List<FieldInfo>
+    }
+
+    class ClassInfo {
+        + name : String
+        + methods : List<MethodInfo>
+        + fields : List<FieldInfo>
+        + dependencies : List<String>
+        + hasPublicConstructor : boolean
+        + hasEquals : boolean
+        + hasHashCode : boolean
+    }
+
+    class MethodInfo {
+        + name : String
+        + description : String
+        + parameters : List<String>
+        + returnType : String
+        + access : int
+        + isConstructor : boolean
+    }
+
+    class FieldInfo {
+        + name : String
+        + type : String
+        + access : int
+        + used : boolean
+    }
+
+    class ProjectInfo {
+        + classes : List<ClassInfo>
+    }
+
+    ASMUtil --> ProjectInfo
+    ASMUtil --> ClassInfo
+    ClassInfo --> "*" MethodInfo
+    ClassInfo --> "*" FieldInfo
+    ClassVisitorImpl --> "*" MethodInfo
+    ClassVisitorImpl --> "*" FieldInfo
+}
+
+package "domain.check" {
+
+    interface ClassCheckRule {
+        + check(classInfo:ClassInfo) : CheckResult
+    }
+
+    interface ProjectCheckRUle {
+        + check(projectInfo:ProjectInfo) : CheckResult
+    }
+
+    class CheckResult {
+        - checkName : String
+        - className : String
+        - result : boolean
+        - message : String
+        + toString() : String
+    }
+
+    class CheckChain {
+        - classChecks : List<ClassCheckRule>
+        - projectChecks : List<ProjectCheckRUle>
+        + addClassCheck(rule:ClassCheckRule)
+        + addProjectCheck(rule:ProjectCheckRUle)
+        + executeChecks(pi:ProjectInfo) : List<CheckResult>
+    }
+
+    class EqualsWithoutHashCodeClassCheck
+    class PublicConstructorClassCheck
+    class NameConventionClassCheck
+    class PoorCohesionClassCheck
+    class CycleDependenciesCheck {
+        - dependencyGraph : Map<String,Set<String>>
+        + addDependencies(name:String, deps:List<String>)
+    }
+    class GptFeedBack {
+        - client : OpenAIClient
+    }
+
+    ClassCheckRule <|.. EqualsWithoutHashCodeClassCheck
+    ClassCheckRule <|.. PublicConstructorClassCheck
+    ClassCheckRule <|.. NameConventionClassCheck
+    ClassCheckRule <|.. PoorCohesionClassCheck
+
+    ProjectCheckRUle <|.. CycleDependenciesCheck
+    ProjectCheckRUle <|.. GptFeedBack
+
+    CheckChain --> "*" ClassCheckRule
+    CheckChain --> "*" ProjectCheckRUle
+    CheckChain --> "*" CheckResult
+
+    ClassCheckRule ..> CheckResult
+    ProjectCheckRUle ..> CheckResult
+}
+
+package domain {
+
+    class ProjectAnalyzer {
+        - checkChain : CheckChain
+        - asmUtil : ASMUtil
+        - builder : ReportBuilder
+        + ProjectAnalyzer(path:String)
+        + analyze() : String
+    }
+
+    class ReportBuilder {
+        - results : List<CheckResult>
+        - fileGenerator : ReportFileGenerator
+        + ReportBuilder(filePath:String)
+        + addResult(r:CheckResult)
+        + build(saveFile:boolean) : String
+    }
+
+    ProjectAnalyzer --> ASMUtil
+    ProjectAnalyzer --> CheckChain
+    ProjectAnalyzer --> ReportBuilder
+    ReportBuilder --> ReportFileGenerator
+    ReportBuilder --> "*" CheckResult
+}
+
+package presentation {
+    class Main {
+        + {static} main(args:String[]) : void
+    }
+    Main --> ProjectAnalyzer
+}
+
+@enduml
