@@ -2,19 +2,12 @@
 
 package config {
     class Config {
-        + PROJECT_PATH : String
-        + FILE_GENERATION_PATH : String
-        + API_KEY : String
+        + {static} PROJECT_PATH : String
+        + {static} FILE_GENERATION_PATH : String
+        + {static} API_KEY : String
     }
 }
 
-package datasource {
-    class ReportFileGenerator {
-        - filePath : String
-        + ReportFileGenerator(filePath:String)
-        + generateFile(content:String) : void
-    }
-}
 
 package "domain.asm" {
 
@@ -140,6 +133,12 @@ package domain {
         + build(saveFile:boolean) : String
     }
 
+    class ReportFileGenerator {
+            - filePath : String
+            + ReportFileGenerator(filePath:String)
+            + generateFile(content:String) : void
+        }
+
     ProjectAnalyzer --> ASMUtil
     ProjectAnalyzer --> CheckChain
     ProjectAnalyzer --> ReportBuilder
@@ -152,6 +151,9 @@ package presentation {
         + {static} main(args:String[]) : void
     }
     Main --> ProjectAnalyzer
+    Main ..> Config
+    GptFeedBack ..> Config
+    ProjectAnalyzer ..> Config
 }
 
 @enduml

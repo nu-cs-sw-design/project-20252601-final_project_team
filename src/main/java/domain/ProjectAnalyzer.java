@@ -26,7 +26,7 @@ public class ProjectAnalyzer {
         checkChain.addClassCheck(new NameConventionClassCheck());
         checkChain.addClassCheck(new PoorCohesionClassCheck());
         checkChain.addProjectCheck(new CycleDependenciesCheck());
-//        checkChain.addProjectCheck(new GptFeedBack());
+        checkChain.addProjectCheck(new GptFeedBack());
     }
 
     public String analyze() {

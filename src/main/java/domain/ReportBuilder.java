@@ -1,6 +1,5 @@
 package domain;
 
-import datasource.ReportFileGenerator;
 import domain.check.CheckResult;
 
 import java.util.ArrayList;

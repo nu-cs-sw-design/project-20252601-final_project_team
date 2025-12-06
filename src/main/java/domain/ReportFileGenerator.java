@@ -1,4 +1,4 @@
-package datasource;
+package domain;
 
 import java.io.FileWriter;
 import java.io.IOException;
