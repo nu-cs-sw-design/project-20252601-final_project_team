@@ -1,0 +1,424 @@
+Check: EqualsWithoutHashCode
+   Class: datasource.ReportFileGenerator
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: datasource.ReportFileGenerator
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: datasource.ReportFileGenerator
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: datasource.ReportFileGenerator
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: config.Config
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: config.Config
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: config.Config
+   Result: FAIL
+   Message: Field 'PROJECT_PATH' must be camelCase or ALL_CAPS for constants. 
+
+Check: Cohesion Check
+   Class: config.Config
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.MethodInfo
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.MethodInfo
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.MethodInfo
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.MethodInfo
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.ClassInfo
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.ClassInfo
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.ClassInfo
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.ClassInfo
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.ASMUtil
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.ASMUtil
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.ASMUtil
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.ASMUtil
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.FieldInfo
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.FieldInfo
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.FieldInfo
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.FieldInfo
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.ClassVisitorImpl
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.ClassVisitorImpl
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.ClassVisitorImpl
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.ClassVisitorImpl
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.asm.ProjectInfo
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.asm.ProjectInfo
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.asm.ProjectInfo
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.asm.ProjectInfo
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.ReportBuilder
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.ReportBuilder
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.ReportBuilder
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.ReportBuilder
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.ProjectAnalyzer
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.ProjectAnalyzer
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.ProjectAnalyzer
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.ProjectAnalyzer
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.ProjectCheckRule
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.ProjectCheckRule
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.ProjectCheckRule
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.ProjectCheckRule
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.GptFeedBack
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.GptFeedBack
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.GptFeedBack
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.GptFeedBack
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.EqualsWithoutHashCodeClassCheck
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.EqualsWithoutHashCodeClassCheck
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.EqualsWithoutHashCodeClassCheck
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.EqualsWithoutHashCodeClassCheck
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.PoorCohesionClassCheck
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.PoorCohesionClassCheck
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.PoorCohesionClassCheck
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.PoorCohesionClassCheck
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.NameConventionClassCheck
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.NameConventionClassCheck
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.NameConventionClassCheck
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.NameConventionClassCheck
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.CheckResult
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.CheckResult
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.CheckResult
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.CheckResult
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.ClassCheckRule
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.ClassCheckRule
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.ClassCheckRule
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.ClassCheckRule
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.CycleDependenciesCheck
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.CycleDependenciesCheck
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.CycleDependenciesCheck
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.CycleDependenciesCheck
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.PublicConstructorClassCheck
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.PublicConstructorClassCheck
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.PublicConstructorClassCheck
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.PublicConstructorClassCheck
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: domain.check.CheckChain
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: domain.check.CheckChain
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: domain.check.CheckChain
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: domain.check.CheckChain
+   Result: PASS
+   Message: High Cohesion
+
+Check: EqualsWithoutHashCode
+   Class: presentation.Main
+   Result: PASS
+   Message: OK
+
+Check: PublicConstructor
+   Class: presentation.Main
+   Result: FAIL
+   Message: No public constructor
+
+Check: NameConventionClassCheck
+   Class: presentation.Main
+   Result: PASS
+   Message: OK
+
+Check: Cohesion Check
+   Class: presentation.Main
+   Result: PASS
+   Message: High Cohesion
+
+Check: Cycle Dependencies Check
+   Result: PASS
+   Message: There is no cycle dependencies
+

@@ -9,13 +9,13 @@ import java.util.List;
 public class CheckChain {
     private final List<ClassCheckRule> classChecks = new ArrayList<>();
 
-    private final List<ProjectCheckRUle> projectChecks  = new ArrayList<>();
+    private final List<ProjectCheckRule> projectChecks  = new ArrayList<>();
 
     public void addClassCheck(ClassCheckRule check) {
         classChecks.add(check);
     }
 
-    public void addProjectCheck(ProjectCheckRUle check) {
+    public void addProjectCheck(ProjectCheckRule check) {
         projectChecks.add(check);
     }
 
@@ -26,7 +26,7 @@ public class CheckChain {
                 results.add(r.check(cls));
             }
         }
-        for(ProjectCheckRUle r : projectChecks) {
+        for(ProjectCheckRule r : projectChecks) {
             results.add(r.check(pi));
         }
         return results;

@@ -13,7 +13,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ROOT PATH of the Java project:");
         String rootPath = scanner.nextLine().trim();
-        // 1. 自动检测编译目录
         String bytecodePath = detectBytecodePath(rootPath);
         if (bytecodePath == null) {
             System.err.println("ERROR: Cannot find compiled .class files under the project root.");
@@ -23,34 +22,25 @@ public class Main {
         System.out.println("Detected bytecode path:");
         System.out.println("  → " + bytecodePath);
 
-        // 2. 设置到 config（如果你确实需要）
         Config.PROJECT_PATH = bytecodePath;
 
-        // 3. 执行分析
-        ProjectAnalyzer analyzer = new ProjectAnalyzer(bytecodePath);
+        ProjectAnalyzer analyzer = new ProjectAnalyzer(bytecodePath, Config.FILE_GENERATION_PATH);
         String report = analyzer.analyze();
 
-        // 4. 输出结果
-        System.out.println("\n===== Static Analysis Report =====");
+        System.out.println("\n===== Analysis Report =====");
         System.out.println(report);
-        System.out.println("==================================");
-
         System.out.println("Report saved to: report.txt");
     }
 
-    /**
-     * 自动检测项目的 class 文件存放路径。
-     * 支持 Maven 和 IntelliJ 默认目录。
-     */
     private static String detectBytecodePath(String root) {
 
         String[] candidates = new String[] {
-                root + "/target/classes",                 // Maven
-                root + "/out/production",                 // IntelliJ
+                root + "/target/classes",
+                root + "/out/production",
                 root + "/out/production/classes",
                 root + "/out/production/project",
-                root + "/bin",                            // Eclipse
-                root                                       // 用户传的如果就是 class 目录
+                root + "/bin",
+                root
         };
 
         for (String path : candidates) {
@@ -63,9 +53,6 @@ public class Main {
         return null;
     }
 
-    /**
-     * 检查目录是否包含 .class 文件
-     */
     private static boolean containsClassFiles(File dir) {
         File[] files = dir.listFiles();
         if (files == null) return false;

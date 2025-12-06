@@ -13,12 +13,12 @@ public class CheckResult {
 
     @Override
     public String toString() {
-        return "----------------------------------------\n" +
-                "Check:      " + checkName + "\n" +
-                "Class:      " + className + "\n" +
-                "Result:     " + (result ? "PASS" : "FAIL") + "\n" +
-                "Message:    " + message + "\n" +
-                "----------------------------------------";
+        return (this.checkName == null ? "" : "Check: " + this.checkName + System.lineSeparator())
+                + (this.className == null ? "" : "   Class: " + this.className + System.lineSeparator())
+                + "   Result: " + (this.result ? "PASS" : "FAIL")
+                + System.lineSeparator()
+                + "   Message: " + this.message
+                + System.lineSeparator();
     }
 
 }

@@ -6,10 +6,8 @@ import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 import config.Config;
 import domain.asm.ProjectInfo;
-import domain.check.CheckResult;
-import domain.check.ProjectCheckRUle;
 
-public class GptFeedBack implements ProjectCheckRUle {
+public class GptFeedBack implements ProjectCheckRule {
     private final OpenAIClient client;
 
     public GptFeedBack() {

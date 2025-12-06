@@ -4,7 +4,21 @@ import domain.asm.ClassInfo;
 import domain.asm.FieldInfo;
 import domain.asm.MethodInfo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NameConventionClassCheck implements ClassCheckRule {
+    /**
+    * The following names do not need to be checked:
+    * <init>, <clinit>;
+    **/
+    private Set<String> waived;
+
+    public NameConventionClassCheck() {
+        this.waived = new HashSet<>();
+        waived.add("<init>");
+        waived.add("<clinit>");
+    }
 
     @Override
     public CheckResult check(ClassInfo classInfo) {
@@ -36,24 +50,22 @@ public class NameConventionClassCheck implements ClassCheckRule {
     }
 
     private boolean checkClassName(String name) {
-        // PascalCase: First letter uppercase + not containing underscores
-        return Character.isUpperCase(name.charAt(0)) && !name.contains("_");
+        if(name.contains(".")) name = name.substring(name.lastIndexOf('.') + 1);
+        return waived.contains(name) || Character.isUpperCase(name.charAt(0)) && !name.contains("_");
     }
 
     private boolean checkMethodName(String name) {
-        // camelCase: first letter lowercase + no underscores
-        return Character.isLowerCase(name.charAt(0)) && !name.contains("_");
+        if(name.contains(".")) name = name.substring(name.lastIndexOf('.') + 1);
+        return waived.contains(name) || Character.isLowerCase(name.charAt(0)) && !name.contains("_");
     }
 
     private boolean checkFieldName(String name, int access) {
-        // CONSTANT: static final → ALL_CAPS
+        if(name.contains(".")) name = name.substring(name.lastIndexOf('.') + 1);
         boolean isConstant = isStaticFinal(access);
-
         if (isConstant) {
-            return name.equals(name.toUpperCase()) && name.contains("_");
+            return waived.contains(name) || name.equals(name.toUpperCase()) && name.contains("_");
         } else {
-            // normal fields must be camelCase
-            return Character.isLowerCase(name.charAt(0)) && !name.contains("_");
+            return waived.contains(name) || Character.isLowerCase(name.charAt(0)) && !name.contains("_");
         }
     }
 

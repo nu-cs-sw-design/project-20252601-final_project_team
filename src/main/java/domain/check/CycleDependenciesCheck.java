@@ -4,7 +4,7 @@ import domain.asm.ProjectInfo;
 
 import java.util.*;
 
-public class CycleDependenciesCheck implements ProjectCheckRUle {
+public class CycleDependenciesCheck implements ProjectCheckRule {
     private final Map<String, Set<String>> dependencyGraph;
 
     public CycleDependenciesCheck() {

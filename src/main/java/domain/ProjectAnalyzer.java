@@ -12,21 +12,21 @@ public class ProjectAnalyzer {
     private final ASMUtil asmUtil;
     private final ReportBuilder builder;
 
-    public ProjectAnalyzer(String path) {
+    public ProjectAnalyzer(String path, String reportPath) {
         try {
             this.asmUtil = new ASMUtil(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         this.checkChain = new CheckChain();
-        this.builder = new ReportBuilder("report.txt");
+        this.builder = new ReportBuilder(reportPath);
 
         checkChain.addClassCheck(new EqualsWithoutHashCodeClassCheck());
         checkChain.addClassCheck(new PublicConstructorClassCheck());
         checkChain.addClassCheck(new NameConventionClassCheck());
         checkChain.addClassCheck(new PoorCohesionClassCheck());
         checkChain.addProjectCheck(new CycleDependenciesCheck());
-        checkChain.addProjectCheck(new GptFeedBack());
+//        checkChain.addProjectCheck(new GptFeedBack());
     }
 
     public String analyze() {
