@@ -2,6 +2,7 @@ package domain.check;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
+import com.openai.errors.UnauthorizedException;
 import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 import config.Config;
@@ -15,13 +16,17 @@ public class GptFeedBack implements ProjectCheckRule {
     }
 
     private String getFeedback(String content) {
-        ResponseCreateParams params = ResponseCreateParams.builder()
-                .input(content)
-                .model("gpt-5-nano")
-                .build();
-        Response response = client.responses().create(params);
         StringBuilder sb = new StringBuilder();
-        response.output().forEach(item -> item.message().ifPresent(msg -> msg.content().forEach(c -> c.outputText().ifPresent(textObj -> sb.append(textObj.text())))));
+        try {
+            ResponseCreateParams params = ResponseCreateParams.builder()
+                    .input(content)
+                    .model("gpt-5-nano")
+                    .build();
+            Response response = client.responses().create(params);
+            response.output().forEach(item -> item.message().ifPresent(msg -> msg.content().forEach(c -> c.outputText().ifPresent(textObj -> sb.append(textObj.text())))));
+        } catch (UnauthorizedException e) {
+            return null;
+        }
         return sb.toString();
     }
 
@@ -31,7 +36,7 @@ public class GptFeedBack implements ProjectCheckRule {
         String content = "Follow is my project information. Can you give me some advice?";
         content += projectInfo.classes.toString();
         String message = getFeedback(content);
-        boolean result = message.equals("");
+        boolean result = message != null && message.isEmpty();
         return new CheckResult(checkName, null, result, message);
     }
 }
