@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-/*
- * TODO: Change the input of ASMUtil from string to byte[]
- */
 public class ASMUtil {
     private final Path root;
 
@@ -27,8 +24,6 @@ public class ASMUtil {
         info.setName(cr.getClassName().replace('/', '.'));
         info.setMethods(cv.methods);
         info.setFields(cv.fields);
-
-        // dependencies / equals / hashcode remain TODO
         info.setDependencies(new ArrayList<>());
         info.setHasPublicConstructor(false);
         info.setHasEquals(false);
@@ -37,18 +32,12 @@ public class ASMUtil {
         return info;
     }
 
-    /*
-     * TODO: Load many classes at once
-     */
     public ProjectInfo loadProject() {
-        // 用于保存整个项目中所有解析出来的类信息
         List<ClassInfo> classes = new ArrayList<>();
-
         try (Stream<Path> paths = Files.walk(root)) {
-            paths.filter(path -> path.toString().endsWith(".class"))// 过滤，只保留 .class 文件
+            paths.filter(path -> path.toString().endsWith(".class"))
                     .forEach(classFile -> {
                         try {
-                            // 读取 .class 文件的全部字节，获得字节码, 调用 ASM 解析此类并且加入到类的合集中
                             byte[] bytecode = Files.readAllBytes(classFile);
                             ClassInfo info = loadClass(bytecode);
                             classes.add(info);

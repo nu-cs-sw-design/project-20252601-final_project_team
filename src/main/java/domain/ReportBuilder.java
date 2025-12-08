@@ -17,14 +17,14 @@ public class ReportBuilder {
         results.add(r);
     }
 
-    public String build(boolean saveFile) {
+    public String build() {
         StringBuilder sb = new StringBuilder();
 
         for (CheckResult r : results) {
             sb.append(r.toString()).append(System.lineSeparator());
         }
 
-        if (saveFile) fileGenerator.generateFile(sb.toString());
+        fileGenerator.generateFile(sb.toString());
         return sb.toString();
     }
 }

@@ -33,7 +33,7 @@ public class GptFeedBack implements ProjectCheckRule {
     @Override
     public CheckResult check(ProjectInfo projectInfo) {
         String checkName = "LLM FeedBack";
-        String content = "Follow is my project information. Can you give me some advice?";
+        String content = "Following is my project information. Can you give me some advice?";
         content += projectInfo.classes.toString();
         String message = getFeedback(content);
         boolean result = message != null && message.isEmpty();

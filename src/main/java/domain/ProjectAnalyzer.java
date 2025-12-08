@@ -33,6 +33,6 @@ public class ProjectAnalyzer {
         ProjectInfo pi = asmUtil.loadProject();
         List<CheckResult> results = checkChain.executeChecks(pi);
         for (CheckResult r : results) builder.addResult(r);
-        return builder.build(true);
+        return builder.build();
     }
 }
